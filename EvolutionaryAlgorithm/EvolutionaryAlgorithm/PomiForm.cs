@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace EvolutionaryAlgorithm
 {
-    public partial class Form1 : Form
+    public partial class Pomi : Form
     {
-        public Form1()
+        public Pomi()
         {
             InitializeComponent();
+        }
+
+        private void Pomi_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
