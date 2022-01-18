@@ -16,7 +16,7 @@
 
 using System;
 
-namespace GenericEquationSolver
+namespace EvolutionaryAlgorithm
 {
     /// <summary>
     /// Clasa care reprezinta un individ din populatie
@@ -35,8 +35,7 @@ namespace GenericEquationSolver
 
         private static Random _rand = new Random();
 
-        // Complexitatea clasei este O(1), considerand numarul de gene din intervalul [1,4]
-        public Chromosome(int noGenes, double minValue, double maxValue)
+       public Chromosome(int noGenes, double[] minValues, double[] maxValues)
         {
             NoGenes = noGenes;
             Genes = new double[noGenes];
@@ -45,10 +44,10 @@ namespace GenericEquationSolver
 
             for (int i = 0; i < noGenes; i++)
             {
-                MinValues[i] = minValue;
-                MaxValues[i] = maxValue;
+                MinValues[i] = minValues[i];
+                MaxValues[i] = maxValues[i];
 
-                Genes[i] = MinValues[i] + _rand.NextDouble() * (MaxValues[i] - MinValues[i]); // initializare aleatorie a genelor
+                Genes[i] = minValues[i] + _rand.NextDouble() * (maxValues[i] - minValues[i]); // initializare aleatorie a genelor
             }
         }
 

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chromosome.cs" />
+    <Compile Include="IProblem.cs" />
     <Compile Include="PomiForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +56,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rezolvare.cs" />
     <EmbeddedResource Include="PomiForm.resx">
       <DependentUpon>PomiForm.cs</DependentUpon>
     </EmbeddedResource>
