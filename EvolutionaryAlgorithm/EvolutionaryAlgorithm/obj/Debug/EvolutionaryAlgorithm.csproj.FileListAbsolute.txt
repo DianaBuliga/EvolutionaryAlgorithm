@@ -1,0 +1,10 @@
+C:\Users\diana\Documents\Facultate\Facultate\An 4\IA\Tema\tema\EvolutionaryAlgorithm\EvolutionaryAlgorithm\EvolutionaryAlgorithm\bin\Debug\EvolutionaryAlgorithm.exe.config
+C:\Users\diana\Documents\Facultate\Facultate\An 4\IA\Tema\tema\EvolutionaryAlgorithm\EvolutionaryAlgorithm\EvolutionaryAlgorithm\bin\Debug\EvolutionaryAlgorithm.exe
+C:\Users\diana\Documents\Facultate\Facultate\An 4\IA\Tema\tema\EvolutionaryAlgorithm\EvolutionaryAlgorithm\EvolutionaryAlgorithm\bin\Debug\EvolutionaryAlgorithm.pdb
+C:\Users\diana\Documents\Facultate\Facultate\An 4\IA\Tema\tema\EvolutionaryAlgorithm\EvolutionaryAlgorithm\EvolutionaryAlgorithm\obj\Debug\EvolutionaryAlgorithm.csproj.AssemblyReference.cache
+C:\Users\diana\Documents\Facultate\Facultate\An 4\IA\Tema\tema\EvolutionaryAlgorithm\EvolutionaryAlgorithm\EvolutionaryAlgorithm\obj\Debug\EvolutionaryAlgorithm.Pomi.resources
+C:\Users\diana\Documents\Facultate\Facultate\An 4\IA\Tema\tema\EvolutionaryAlgorithm\EvolutionaryAlgorithm\EvolutionaryAlgorithm\obj\Debug\EvolutionaryAlgorithm.Properties.Resources.resources
+C:\Users\diana\Documents\Facultate\Facultate\An 4\IA\Tema\tema\EvolutionaryAlgorithm\EvolutionaryAlgorithm\EvolutionaryAlgorithm\obj\Debug\EvolutionaryAlgorithm.csproj.GenerateResource.cache
+C:\Users\diana\Documents\Facultate\Facultate\An 4\IA\Tema\tema\EvolutionaryAlgorithm\EvolutionaryAlgorithm\EvolutionaryAlgorithm\obj\Debug\EvolutionaryAlgorithm.csproj.CoreCompileInputs.cache
+C:\Users\diana\Documents\Facultate\Facultate\An 4\IA\Tema\tema\EvolutionaryAlgorithm\EvolutionaryAlgorithm\EvolutionaryAlgorithm\obj\Debug\EvolutionaryAlgorithm.exe
+C:\Users\diana\Documents\Facultate\Facultate\An 4\IA\Tema\tema\EvolutionaryAlgorithm\EvolutionaryAlgorithm\EvolutionaryAlgorithm\obj\Debug\EvolutionaryAlgorithm.pdb
