@@ -27,6 +27,7 @@ namespace EvolutionaryAlgorithm
             InitializeComponent();
         }
 
+
         private void Pomi_Load(object sender, EventArgs e)
         {
 
@@ -34,7 +35,11 @@ namespace EvolutionaryAlgorithm
 
         private void button2_Click(object sender, EventArgs e)
         {
+            int pop;
+            Int32.TryParse(textBox1.Text, out pop);
+            _populationSize = pop;
 
+            textBox9.Text = _populationSize.ToString();
         }
     }
 }

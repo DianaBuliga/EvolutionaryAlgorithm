@@ -27,28 +27,23 @@ namespace EvolutionaryAlgorithm
 
         public double[] Genes { get; set; } // valorile genelor
 
-        public double[] MinValues { get; set; } // valorile minime posibile ale genelor
+        public double price { get; set; } // pretul 
 
-        public double[] MaxValues { get; set; } // valorile maxime posibile ale genelor
+        public int amount { get; set; } // cantitate
+
+        public double lowAmount { get; set; } // nr de kilograme care scad dupa plantare
 
         public double Fitness { get; set; } // valoarea functiei de adaptare a individului
 
         private static Random _rand = new Random();
 
-       public Chromosome(int noGenes, double[] minValues, double[] maxValues)
+       public Chromosome(int noGenes, double price, double amount, double lowAmount)
         {
             NoGenes = noGenes;
             Genes = new double[noGenes];
-            MinValues = new double[noGenes];
-            MaxValues = new double[noGenes];
-
-            for (int i = 0; i < noGenes; i++)
-            {
-                MinValues[i] = minValues[i];
-                MaxValues[i] = maxValues[i];
-
-                Genes[i] = minValues[i] + _rand.NextDouble() * (maxValues[i] - minValues[i]); // initializare aleatorie a genelor
-            }
+            Genes[0] = _rand.NextDouble() * price;
+            Genes[1] = _rand.NextDouble() * amount; 
+            Genes[2] = _rand.NextDouble() * lowAmount; 
         }
 
         public Chromosome(Chromosome c) // constructor de copiere
@@ -57,15 +52,10 @@ namespace EvolutionaryAlgorithm
             Fitness = c.Fitness;
 
             Genes = new double[c.NoGenes];
-            MinValues = new double[c.NoGenes];
-            MaxValues = new double[c.NoGenes];
+            price = c.price;
+            amount = c.amount;
+            lowAmount = c.lowAmount;
 
-            for (int i = 0; i < c.Genes.Length; i++)
-            {
-                Genes[i] = c.Genes[i];
-                MinValues[i] = c.MinValues[i];
-                MaxValues[i] = c.MaxValues[i];
-            }
         }
     }
 }
