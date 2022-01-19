@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chromosome.cs" />
+    <Compile Include="Equation.cs" />
     <Compile Include="IProblem.cs" />
     <Compile Include="PomiForm.cs">
       <SubType>Form</SubType>

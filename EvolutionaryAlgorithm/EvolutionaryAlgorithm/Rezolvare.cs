@@ -24,18 +24,17 @@ namespace EvolutionaryAlgorithm
     public class Selection
     {
 
-        public static Chromosome GetBest(Chromosome[] population)
+        public static Chromosome GetBest(Chromosome[] population, int populationSize)
         {
             Chromosome best = population[0];
 
-            for(int i=0; i<population.Length; ++i)
+            for(int i=0; i<populationSize; ++i)
             {
-                if (best.Fitness > population[i].Fitness)
+                if (best.Fitness < population[i].Fitness)
                     best = population[i];
             }
 
             return best;
-
         }
     }
 
@@ -46,43 +45,47 @@ namespace EvolutionaryAlgorithm
     /// </summary>
     public class EvolutionaryAlgorithm
     {
-        private static Random _rand = new Random();
+        private Random _rand = new Random();
         /// <summary>
         /// Metoda de optimizare care gaseste solutia problemei
         /// </summary>
-        public Chromosome Solve(IOptimizationProblem p, int populationSize, int maxGenerations, double crossoverRate, double motivationRate)
+        public String Solve(IOptimizationProblem p, int populationSize, int maxGenerations, double crossoverRate, double motivationRate, int maxPopulation)
         {
-
-            Chromosome[] population = new Chromosome[maxGenerations];
+            double sumMax = 0;
+            String sume ="";
+            Chromosome[] population = new Chromosome[maxPopulation];
             for (int i = 0; i < populationSize; i++)
             {
                 population[i] = p.MakeChromosome();
                 p.ComputeFitness(population[i]);
+                Console.WriteLine(population[i].Genes[1]);
             }
 
-            //gen = nr de copaci care se afla in loivada la momentul t
-            for (int gen = populationSize; gen < maxGenerations; gen++)
+            //
+            for (int gen = 0; gen < maxGenerations && populationSize<maxPopulation; gen++)
             {
-                Chromosome[] newPopulation = new Chromosome[gen+1];
+                double sum = 0;
 
-                int new1 = _rand.Next(gen);
-                int new2 = _rand.Next(gen);
-                int new3 = _rand.Next(gen);
+                // se aleg random 3 chromosomi dinpopulatie
+                int new1 = _rand.Next(populationSize);
+                int new2 = _rand.Next(populationSize);
+                int new3 = _rand.Next(populationSize);
 
                 while (new1 == new2 || new1 == new3 || new2 == new3)
                 {
-                    new1 = _rand.Next(gen);
-                    new2 = _rand.Next(gen);
-                    new3 = _rand.Next(gen);
+                    new1 = _rand.Next(populationSize);
+                    new2 = _rand.Next(populationSize);
+                    new3 = _rand.Next(populationSize);
                 }
 
                 Chromosome newChromosome1 = population[new1];
                 Chromosome newChromosome2 = population[new2];
                 Chromosome newChromosome3 = population[new3];
 
+                // se creaza noul cromozom prin incrucisarea celor 3 cromozomi alesi aleatoriu
                 Chromosome potentialChromosome = new Chromosome(newChromosome3);
                 int divisionPoint = _rand.Next(0, gen);
-                //gene = gena
+
                 for (int j = 0; j < potentialChromosome.NoGenes; ++j)
                 {
                     if (j == divisionPoint || _rand.NextDouble() < crossoverRate)
@@ -91,66 +94,78 @@ namespace EvolutionaryAlgorithm
                     }
                     else
                     {
-                        potentialChromosome.Genes[j] = population[gen].Genes[j];
+                        potentialChromosome.Genes[j] = newChromosome1.Genes[j];
                     }
                 }
 
+
                 p.ComputeFitness(potentialChromosome);
-                int randCromosome = _rand.Next(gen);
-                for(int k=0; k<gen; ++k)
+
+                // se alege random un cromozome din vechea populatie pentru a compara fitness-ul
+                int randCromosome = _rand.Next(populationSize);
+               
+                // Se recalculeaza cantitatea 
+                Chromosome[] newPopulation = recalculateGenes(population, populationSize);
+
+                //se salveaza in vechea populatie, noua populatie cu cantitaea schimbata
+                for(int i = 0; i < populationSize; ++i)
                 {
-                    newPopulation[k] = population[k];
+                    population[i] = newPopulation[i];
                 }
 
+                // se verifica fitness-ul noului individ
+                // daca noul individ are fitness-ul mai mare atunci se adauga in populatie
+                // daca nu, se adauga inidividul ales random
                 if (potentialChromosome.Fitness >= population[randCromosome].Fitness)
                 {
-                    newPopulation[gen] = potentialChromosome;
+                    population[populationSize] = potentialChromosome;
                 }
                 else
                 {
-                    newPopulation[gen] = population[randCromosome];
+                    population[populationSize] = population[randCromosome];
                 }
 
-                population[gen+1] = newPopulation[gen+1];
+                // se calculeaza venitul produs de noua populatie
+                for (int j = 0; j < gen; j++)
+                {
+                    sum += population[j].Genes[0] * population[j].Genes[1];
+                }
+                
+                // daca venitul este mai mare decat cel maxim se salveaza noul venit maxim si se mareste populatia cu un individ
+                // daca venitul este mai mic, atunci se inchide bucla si se salveaza numarul de pomi 
+                if(sum >= sumMax)
+                {
+                    sumMax = sum;
+                    populationSize++;
+                    sume = sume + "\n " + sum; 
+                }
+                else
+                {
+                   
+                    sume = sume + "\n " + sum;
+                    break;
+                }
             }
 
-            return Selection.GetBest(population);
+            return populationSize+"\n "+sume;
         }
+
+
+        //functie care ia toti cromozomii si le scade cromozomul
+        public Chromosome[] recalculateGenes(Chromosome[] chromosomeList, int popSize)
+        {
+            Chromosome[] newChr = new Chromosome[popSize];
+            for(int i=0; i< popSize; ++i)
+            {
+                newChr[i] = chromosomeList[i];
+                Console.WriteLine(newChr[i].Genes[1]);
+            }
+
+            return newChr;
+        }
+
     }
 
-    //==================================================================================
 
-    /// <summary>
-    /// Clasa care reprezinta rezolvarea ecuatiei
-    /// </summary>
-    public class Equation : IOptimizationProblem
-    {
-
-        private double _price;
-        private int _amount;
-        private double _lowAmount;
-
-        public Equation(double price, int amount, double lowAmount)
-        {
-            _price = price;
-            _amount = amount;
-            _lowAmount = lowAmount;
-        }
-
-        public Chromosome MakeChromosome()
-        {
-            return new Chromosome(3, _price, _amount, _lowAmount);
-        }
-
-        public void ComputeFitness(Chromosome c)
-        {
-            double x1 = c.Genes[0]; // pret
-            double x2 = c.Genes[1]; // productie
-            double x3 = c.Genes[2]; // cat de mult scade productia pentru fiecare copac plantat ulterior
-
-            c.Fitness = 0.4 * x1 + 0.4 * x2 + 0.2 * x3; //valoare pentru fiecare copac
-
-        }
-    }
 }
 

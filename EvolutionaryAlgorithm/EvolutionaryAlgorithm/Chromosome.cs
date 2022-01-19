@@ -29,7 +29,7 @@ namespace EvolutionaryAlgorithm
 
         public double price { get; set; } // pretul 
 
-        public int amount { get; set; } // cantitate
+        public double amount { get; set; } // cantitate
 
         public double lowAmount { get; set; } // nr de kilograme care scad dupa plantare
 
